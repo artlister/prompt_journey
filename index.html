@@ -4173,11 +4173,11 @@ await saveToSupabase(
                     console.log('✓ Images displayed');
                     // Save to Supabase
                     await saveToSupabase(
-                        { prompt: currentText, workflow_id: workflowId },
-                        { workflow: workflowId },
-                        [generatedImageUrl],
-                        'text-to-image'
-                    );
+    { prompt: currentText },
+    { workflow: 'text-to-image-generation' },
+    [generatedImageUrl],
+    'text-to-image'
+);
                 } else {
                     console.warn('⚠ No images found in result');
                     alert('No images were generated. Check console for details.');
