@@ -4171,15 +4171,16 @@ await saveToSupabase(
                     }
                     
                     console.log('✓ Images displayed');
-
-                    // Save to Supabase
+                    // Save each image to Supabase separately
                     if (generatedImageUrls.length > 0) {
-                        await saveToSupabase(
-                            { prompt: currentText },
-                            { workflow: 'text-to-image-generation' },
-                            generatedImageUrls,  // This is already an array
-                            'text-to-image'
-                        );
+                        for (const imageUrl of generatedImageUrls) {
+                            await saveToSupabase(
+                                { prompt: currentText },
+                                { workflow: 'text-to-image-generation' },
+                                [imageUrl],  // Single image in array
+                                'text-to-image'
+                            );
+                        }
                     }
                 } else {
                     console.warn('⚠ No images found in result');
