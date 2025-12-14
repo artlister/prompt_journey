@@ -4729,12 +4729,14 @@ await saveToSupabase(
                 console.log('\n✓ All variations complete. Generated images:', generatedImages);
                 // Save to Supabase
 if (generatedImages.length > 0) {
-    await saveToSupabase(
-        { prompt: currentPrompt },
-        { workflow: 'surprise-me-text' },
-        generatedImages,
-        'surprise-me-text'
-    );
+    for (const imageUrl of generatedImages) {
+        await saveToSupabase(
+            { prompt: currentPrompt },
+            { workflow: workflowId },
+            [imageUrl],  // Single image in array
+            'randomize'
+        );
+    }
 }
                 
             } catch (error) {
